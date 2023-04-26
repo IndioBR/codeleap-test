@@ -4,13 +4,20 @@ import { PostForm } from '../components/PostForm';
 import { PostContainer } from '../components/PostContainer';
 import { useContext, useEffect, useState } from 'react';
 import { MyContext } from '../context/context';
+import { InitialPage } from '../components/InitialPage';
 
 export const App = () => {
   const usr = localStorage.getItem('username');
   const [data, setData] = useState([]);
   const [logged, setLogged] = useState(false);
   const {loading, setLoading} = useContext(MyContext);
+  const [reload, setReload] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setReload(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     if (loading) (async () => {
@@ -33,7 +40,8 @@ export const App = () => {
 
   return (
     <Styled.Container lg={!!logged}>
-      {!logged && <SignUp />}
+      {reload && <InitialPage />}
+      {(!logged && !reload) && <SignUp />}
       {logged && (
         <Styled.Page>
           <div className='page_title'>
