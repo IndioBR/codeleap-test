@@ -42,7 +42,7 @@ export const App = () => {
     <Styled.Container lg={!!logged}>
       {reload && <InitialPage />}
       {(!logged && !reload) && <SignUp />}
-      {logged && (
+      {(logged && !reload) && (
         <Styled.Page>
           <div className='page_title'>
             <span>CodeLeap Network</span>
