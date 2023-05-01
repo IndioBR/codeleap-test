@@ -14,8 +14,13 @@ export const GlobalStyles = createGlobalStyle`
   }
   html {
     font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
   }
-  h1 {}
+  h1, h2, h3 {
+    font-weight: 700;
+  }
+
   a {
     all: unset;
     cursor: pointer;
