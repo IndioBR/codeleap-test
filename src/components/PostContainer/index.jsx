@@ -8,6 +8,24 @@ import { useContext} from 'react';
 import { MyContext } from '../../context/context';
 
 export const PostContainer = ({ post }) => {
+
+  function pubDate(date) {
+    const now = new Date();
+    const datePub = new Date(date);
+    const diff = Math.abs(now - datePub);
+    const min = Math.floor(diff / 1000 / 60);
+    const hours = Math.floor(min / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return days + " days ago";
+    } else if (hours > 0) {
+      return hours + " hours ago";
+    } else {
+      return min + " min ago";
+    }
+  };
+
   const loggedUser = localStorage.getItem('username');
   const {edition, setEdition,
     del, setDel, setPost
@@ -35,7 +53,7 @@ export const PostContainer = ({ post }) => {
       <div className='post_content_div'>
         <div className='post_user'>
           <span>{post.username}</span>
-          <span>{new Date(post.created_datetime).toLocaleDateString()}</span>
+          <span>{pubDate(post.created_datetime)}</span>
         </div>
         <span className='post_content'>
           {post.content}
